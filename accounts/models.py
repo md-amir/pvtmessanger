@@ -9,6 +9,7 @@ from django.db import models
 
 # Create your models here.
 from accounts.managers import AppUserManager
+from pvtmessager.utils import upload_to_image
 
 
 class AppUser(AbstractBaseUser, PermissionsMixin):
@@ -56,6 +57,7 @@ class AppUser(AbstractBaseUser, PermissionsMixin):
             'Unselect this instead of deleting accounts.'
         ),
     )
+    image = models.ImageField(verbose_name='Image', upload_to=upload_to_image, null=True, blank=True)
     date_joined = models.DateTimeField(_('date joined'), default=timezone.now)
 
     EMAIL_FIELD = 'email'
