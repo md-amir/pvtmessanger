@@ -16,4 +16,4 @@ class UserSerializerForLogin(serializers.ModelSerializer):
 
     class Meta:
         model = AppUser
-        fields = ('id', 'email', 'username')
+        fields = ('id', 'email', 'username', 'mobile')

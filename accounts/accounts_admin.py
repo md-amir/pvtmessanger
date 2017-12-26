@@ -6,10 +6,10 @@ class UserAdmin(BaseUserAdmin):
     # form = UserChangeForm
     # add_form = UserCreationForm
     list_display = ('id', 'username', 'nick_name', 'email', 'first_name',
-                    'last_name', 'is_staff', 'mobile', 'mobile_verified')
+                    'last_name', 'is_staff')
     fieldsets = (
         (None, {'fields': ('username', 'password')}),
-        (_('Personal info'), {'fields': ('first_name', 'last_name', 'email', 'mobile', 'nick_name')}),
+        (_('Personal info'), {'fields': ('first_name', 'last_name', 'email',  'nick_name')}),
         (_('Permissions'), {'fields': ('is_active', 'is_staff', 'is_superuser',
                                        'groups', 'user_permissions')}),
         (_('Important dates'), {'fields': ('last_login', 'date_joined')}),
@@ -17,10 +17,10 @@ class UserAdmin(BaseUserAdmin):
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('username', 'nick_name', 'email', 'mobile', 'password1', 'password2')}
+            'fields': ('username', 'nick_name', 'email',  'password1', 'password2')}
          ),
     )
 
-    search_fields = ('email', 'fb_id', 'username', 'nick_name', 'mobile', 'first_name', 'last_name')
+    search_fields = ('email', 'fb_id', 'username', 'nick_name', 'first_name', 'last_name')
     ordering = ('email',)
     filter_horizontal = ()

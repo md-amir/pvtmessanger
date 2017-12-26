@@ -5,6 +5,6 @@ from . import views
 
 urlpatterns = [
     path('amir', views.test_api_django_rest),
-    url(r'login', views.rest_login),
+    url(r'login/', views.rest_login),
 
 ]

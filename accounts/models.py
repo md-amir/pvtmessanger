@@ -41,18 +41,6 @@ class AppUser(AbstractBaseUser, PermissionsMixin):
         default=None,
     )
 
-    mobile = models.CharField(
-        max_length=25,
-        blank=True,
-        null=True,
-        unique=True,
-        default=None,
-        validators=[validators.RegexValidator(
-            r'^\+?1?\d{9,15}$',
-            _('Enter a valid mobile. This value may contain only '
-              'numbers ' 'and + characters.example(+88xxxxxxxxxxx)')), ],
-    )
-    mobile_verified = models.BooleanField(default=False)
     first_name = models.CharField(_('first name'), max_length=30, blank=True)
     last_name = models.CharField(_('last name'), max_length=30, blank=True)
     is_staff = models.BooleanField(
@@ -70,8 +58,10 @@ class AppUser(AbstractBaseUser, PermissionsMixin):
     )
     date_joined = models.DateTimeField(_('date joined'), default=timezone.now)
 
-    USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = []  # required for creating superuser
+    EMAIL_FIELD = 'email'
+    USERNAME_FIELD = 'username'
+    REQUIRED_FIELDS = ['email'] # required for creating superuser
+
     email_verified = models.BooleanField(default=False)
     already_set_password = models.BooleanField(default=False)
 
