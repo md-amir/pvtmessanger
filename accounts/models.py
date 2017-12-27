@@ -3,11 +3,8 @@ from django.core.mail import send_mail
 from django.utils.translation import ugettext_lazy as _
 from django.utils import timezone
 from django.contrib.auth.models import User, PermissionsMixin
-from django.contrib.auth.models import (BaseUserManager, AbstractBaseUser)
+from django.contrib.auth.models import AbstractBaseUser
 from django.db import models
-
-
-# Create your models here.
 from accounts.managers import AppUserManager
 from pvtmessager.utils import upload_to_image
 
@@ -32,7 +29,6 @@ class AppUser(AbstractBaseUser, PermissionsMixin):
         },
     )
 
-    nick_name = models.CharField(max_length=50, null=True, blank=True)
     email = models.EmailField(
         unique=True,
         verbose_name='email address',
@@ -62,10 +58,7 @@ class AppUser(AbstractBaseUser, PermissionsMixin):
 
     EMAIL_FIELD = 'email'
     USERNAME_FIELD = 'username'
-    REQUIRED_FIELDS = ['email'] # required for creating superuser
-
-    email_verified = models.BooleanField(default=False)
-    already_set_password = models.BooleanField(default=False)
+    REQUIRED_FIELDS = ['email']  # required for creating superuser
 
     objects = AppUserManager()
 
@@ -85,4 +78,4 @@ class AppUser(AbstractBaseUser, PermissionsMixin):
         send_mail(subject, message, from_email, [self.email], **kwargs)
 
     def __str__(self):
-        return self.nick_name if self.nick_name else str(self.id)
+        return self.username

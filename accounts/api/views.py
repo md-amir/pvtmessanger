@@ -1,20 +1,16 @@
 from django.contrib.auth import authenticate
-from django.shortcuts import render
-
-# Create your views here.
-
 from rest_framework import permissions
 from rest_framework.authtoken.models import Token
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 
-from accounts.api.serializers import UserSerializerForLogin
+from accounts.api.serializers import UserSerializer
 from accounts.models import AppUser
 
 
 @api_view(['POST', 'GET'])
-def test_api_django_rest(request, version):
-    print(request.version)
+def api_testing_django_rest(request, version):
+
     return Response(
         {"status": True, "message": "your request has been successfully tested."}
     )
@@ -22,8 +18,14 @@ def test_api_django_rest(request, version):
 
 @api_view(['POST'])
 @permission_classes((permissions.AllowAny,))
-def rest_login(request, version):
-    user = None
+def api_login(request, version):
+    """
+    :param request: with username, password
+    :param version:
+    :return: status, successful message, and user instance with id, username, email and token number for further
+    http calls fro token authentication
+
+    """
     username = request.data.get("username", None)
     if not username:
         return Response({"status": False, "message": "user name missing"})
@@ -53,9 +55,22 @@ def rest_login(request, version):
 
         return Response({"status": True,
                          "message": "Login successful", "token": token.key,
-                         "user": UserSerializerForLogin(user).data})
+                         "user": UserSerializer(user, remove_fields=['password', 'id', 'last_login', 'is_active',
+                                                                     'is_staff', 'is_superuser', 'first_name',
+                                                                     'last_name', 'groups', 'user_permissions',
+                                                                     'date_joined']).data})
     else:
         return Response({
             "status": False,
             "message": "User not active"
         })
+
+
+@api_view(['POST'])
+def api_get_all_users(request, version):
+    users = AppUser.objects.all()
+    return Response({'status': True, 'users': UserSerializer(users, many=True,
+                                                             remove_fields=['password', 'id', 'last_login', 'is_active',
+                                                                            'is_staff', 'is_superuser', 'first_name',
+                                                                            'last_name', 'groups', 'user_permissions',
+                                                                            'date_joined']).data})

@@ -7,14 +7,14 @@ from pvtmessager.utils import upload_to_file
 
 
 class Conversation(AbstractBaseModel):
-    created_by = models.ForeignKey(AppUser, on_delete=models.CASCADE, related_name='my_conversation')
-    created_with = models.ForeignKey(AppUser, on_delete=models.CASCADE, related_name='inbox_conversation')
-    is_archive = models.BooleanField(default=False)
+    subscriber = models.ManyToManyField(AppUser, related_name='conversations')
+    creator_id = models.IntegerField(default=0)  # storing creator user id when it's created one time
+    is_archived = models.BooleanField(default=False)
     is_deleted = models.BooleanField(default=False)
 
 
 class Message(AbstractBaseModel):
-    conversation = models.ForeignKey(Conversation, on_delete=models.CASCADE)
+    conversation = models.ForeignKey(Conversation, on_delete=models.CASCADE, related_name='messages')
     owner = models.ForeignKey(AppUser, on_delete=models.CASCADE)
     text = models.TextField(max_length=200)
     is_deleted = models.BooleanField(default=False)

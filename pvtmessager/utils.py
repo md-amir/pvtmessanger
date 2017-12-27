@@ -17,8 +17,10 @@ def generate_user_name():
 
 
 def upload_to_image(instance, filename):
-    return 'profile_image/{}/{}'.format(str(instance.user_id) + instance.user.username, filename)
+    """ create a folder named message_image and stored image in it with their original name"""
+    return 'profile_image/{}'.format(filename)
 
 
 def upload_to_file(instance, filename):
-    return 'message_image/{}/{}'.format(str(instance.user_id) + instance.user.username, filename)
+    """ create a folder named message_image and stored image in it with their original name"""
+    return 'message_image/{}'.format(filename)
