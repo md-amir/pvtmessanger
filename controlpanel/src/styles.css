@@ -1,1 +1,146 @@
 /* You can add global styles to this file, and also import other style files */
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+@import '~bootstrap/dist/css/bootstrap.min.css';
+input.ng-invalid {border-left: 5px solid red}
+textarea.ng-invalid {border-left: 5px solid red}
+textarea.ng-valid {border-left: 5px solid green}
+input.ng-valid {border-left: 5px solid green}
+
+.fheight10{
+    height: 10px;
+}
+
+.fheight20{
+    height: 20px;
+}
+.fheight25{
+    height: 25px;
+}
+.fheight30{
+    height: 30px;
+}
+.fheight35{
+    height: 35px;
+}
+.fheight40{
+    height: 40px;
+}
+.fheight45{
+    height: 45px;
+}
+.fheight50{
+    height: 50px;
+}
+.fheight50{
+    height: 50px;
+}
+.fheight55{
+    height: 55px;
+}
+.fheight60{
+    height: 60px;
+}
+.fheight65{
+    height: 65px;
+}
+.fheight70{
+    height: 70px;
+}
+.fheight75{
+    height: 75px;
+}
+.fheight80{
+    height: 80px;
+}
+
+.fheight100{
+    height: 100px;
+}
+.fheight150{
+    height: 150px;
+}
+.fheight200{
+    height: 200px;
+}
+
+.fheight250{
+    height: 250px;
+}
+
+.fheight350{
+    height: 350px;
+}
+
+.fwidth50{
+    width: 50px;
+}
+.fwidth100{
+    width: 100px;
+}
+.fwidth150{
+    width: 150px;
+}
+.fwidth200{
+    width: 200px;
+}
+.fred{
+    background: red;
+    min-height: 100px !important;
+}
+
+.fgreen{
+    background: green;
+    min-height: 100px !important;
+}
+.fyellow{
+    background: yellow;
+    min-height: 100px !important;
+}
+.fblue{
+    background: blue;
+    min-height: 100px !important;
+}
+.fblack{
+    background: black;
+    min-height: 100px !important;
+}
+.fwhite{
+    background: white;
+    min-height: 100px !important;
+}
+.flvertical-line{
+    width: 3px;
+    background-color: #d0cdcd;
+}
+.fcenter{
+  display:flex;
+  align-items: center;
+  justify-content:center;
+}
+.fun-box{
+    background: #fa0078;
+    min-height: 20px;
+    padding: 19px;
+    margin-bottom: 20px;
+    border: 1px solid #e3e3e3;
+    border-radius: 4px;
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.05);
+}
+.fhr{
+    background: #d0cdcd;
+    height: 2px;
+}
+.fclear{
+    padding: 0px;
+    margin: 0px;
+}
+
+.fullscreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  overflow: auto;
+}

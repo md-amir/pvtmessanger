@@ -8,8 +8,12 @@
 }*/
 
 .parent-center{
-  
+
    text-align:center;
+}
+
+.logo-center{
+  margin: 0 auto;
 }
 
 .clild-center{
@@ -26,7 +30,7 @@
   border: 1px solid #e3e3e3;
   border-radius: 0px;
   box-shadow: inset 0 1px 1px rgba(0,0,0,.05);
-  
+
 }
 .fun-box{
     background: linear-gradient(to right, rgba(255,93,177,1) 0%, rgba(239,1,124,1) 100%);
