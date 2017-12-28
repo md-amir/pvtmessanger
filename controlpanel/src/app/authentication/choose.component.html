@@ -1,0 +1,149 @@
+<div class="row">
+    <div class="col-lg-12 fheight80">
+        <img src="assets/full-name.jpg" height="100%" />
+    </div>
+
+</div>
+<div class="row">
+    <div class="col-md-4 col-md-offset-4 fred well">
+        <div class="container-fluid">
+            <div class="row" *ngIf="chooseMainPalel">
+                <div class="col-lg-12 parent-center">
+                    <h3 class="">Sign up to Fundle</h3>
+                </div>
+                <div class="col-lg-12 fheight20">
+
+                </div>
+                <div class="col-lg-12">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-lg-10 col-lg-offset-1  choose-signup-box parent-center btn btn-default" (click)="signupEmail()">
+                                Sign up with email address
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-12">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-lg-10 col-lg-offset-1 choose-signup-box parent-center btn btn-default" (click)="signupPhone()">
+                                Sign up with phone number
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-12 parent-center">
+                    <a (click)="gohome()">
+                        <p>
+                            Already have an account? Sign in
+                        </p>
+                    </a>
+                </div>
+            </div>
+            <div class="row" *ngIf="emailPanel">
+
+                <div class="col-lg-12 parent-center">
+                    <h3 class="">Sign up to Fundle</h3>
+                </div>
+                <div class="col-lg-12 alert alert-danger" *ngIf="alertMessage">
+                    {{alertMessage}}
+                </div>
+                <div class="col-lg-12">
+                    <form [formGroup]="emailverificationForm" (ngSubmit)="email_verification()" novalidate #refemailVerificationForm>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" class="form-control" formControlName="email" #refEmail placeholder="please enter email" />
+
+                        </div>
+
+                        <div class="form-group">
+                            <button [disabled]="emailverificationForm.invalid" class="btn btn-primary">Verify</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="row" *ngIf="vcodePanel">
+
+                <div class="col-lg-12 parent-center">
+                    <h3 class="">Sign up to Fundle</h3>
+                </div>
+                <div class="col-lg-12 alert alert-success" *ngIf="alertMessage">
+                    {{alertMessage}}
+                </div>
+                <div class="col-lg-12">
+                    <form [formGroup]="verificationCodeForm" (ngSubmit)="code_verification()" novalidate #refCodeVerificationForm>
+                        <div class="form-group">
+                            <label for="code">Verification Code</label>
+                            <input type="text" class="form-control" formControlName="code" #refCode placeholder="please enter verification code" />
+
+                        </div>
+
+                        <div class="form-group">
+                            <button [disabled]="verificationCodeForm.invalid" class="btn btn-primary">Verify</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="row" *ngIf="signUpPanel">
+
+                <div class="col-lg-12 parent-center">
+                    <h3 class="">Sign up to Fundle</h3>
+                </div>
+                <div class="col-lg-12 alert alert-success" *ngIf="alertMessage">
+                    {{alertMessage}}
+                </div>
+                <div class="col-lg-12">
+                    <form [formGroup]="signUpForm" (ngSubmit)="sign_up()" novalidate #refSignUpForm>
+                        <div class="form-group">
+                            <input type="text" class="form-control" formControlName="nickName" #refNickName placeholder="nick name" />
+
+                            <div *ngIf="signUpForm.controls['nickName'].hasError('required') && refPassword.touched" class="alert alert-danger">
+                                Nick name please
+                            </div>
+                            
+                        </div>
+                        <div class="form-group">
+                            <input type="password" class="form-control" formControlName="password" #refPassword placeholder="Password" />
+
+                            <div *ngIf="signUpForm.controls['password'].hasError('required') && refPassword.touched" class="alert alert-danger">
+                                please password
+                            </div>
+                            <div *ngIf="signUpForm.controls['password'].hasError('minlength')" class="alert alert-danger">
+                                please enter at least 6 characters
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <input type="password" class="form-control" formControlName="confirmPassword" #refConfirmPassword placeholder="Confirm Password"
+                            />
+                            <div class="alert alert-danger" *ngIf="signUpForm.controls.confirmPassword.dirty && signUpForm.hasError('mismatchedPasswords')">Passwords do not match.</div>
+                        </div>
+
+                        <div class="form-group">
+                            <input type="text" class="form-control" formControlName="usedRefKey" #refusedRefKey placeholder="referral code (optional)" />
+                        </div>
+
+                        <div class="form-group">
+                            <button [disabled]="signUpForm.invalid" class="btn btn-primary">Sign Up</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="row" *ngIf="kitSignUpPanel">
+
+                <div class="col-lg-12 parent-center">
+                    <h3 class="">Sign up to Fundle</h3>
+                </div>
+                <div class="col-lg-12 alert alert-success" *ngIf="alertMessage">
+                    {{alertMessage}}
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>

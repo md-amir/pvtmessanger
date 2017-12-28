@@ -10,7 +10,6 @@ from accounts.models import AppUser
 
 @api_view(['POST', 'GET'])
 def api_testing_django_rest(request, version):
-
     return Response(
         {"status": True, "message": "your request has been successfully tested."}
     )
@@ -68,7 +67,13 @@ def api_login(request, version):
 
 @api_view(['POST'])
 def api_get_all_users(request, version):
-    users = AppUser.objects.all()
+    """
+
+    :param request:
+    :param version:
+    :return: all users sorting according to name Alphabetical order
+    """
+    users = AppUser.objects.all().order_by('username')
     return Response({'status': True, 'users': UserSerializer(users, many=True,
                                                              remove_fields=['password', 'id', 'last_login', 'is_active',
                                                                             'is_staff', 'is_superuser', 'first_name',

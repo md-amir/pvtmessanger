@@ -12,14 +12,24 @@ class Conversation(AbstractBaseModel):
     is_archived = models.BooleanField(default=False)
     is_deleted = models.BooleanField(default=False)
 
+    def __str__(self):
+        return str(self.id)
+
 
 class Message(AbstractBaseModel):
     conversation = models.ForeignKey(Conversation, on_delete=models.CASCADE, related_name='messages')
-    owner = models.ForeignKey(AppUser, on_delete=models.CASCADE)
+    sender = models.ForeignKey(AppUser, on_delete=models.CASCADE)
     text = models.TextField(max_length=200)
     is_deleted = models.BooleanField(default=False)
+    is_marked_read = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.text
 
 
 class Media(AbstractBaseModel):
     file = models.FileField(upload_to=upload_to_file)
     message = models.ForeignKey(Message, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return str(self.id)

@@ -8,6 +8,7 @@ class UserSerializer(serializers.ModelSerializer):
         super(UserSerializer, self).__init__(*args, **kwargs)
 
         if remove_fields:
+            # dynamically remove field during serializing
             # for multiple fields in a list
             for field_name in remove_fields:
                 self.fields.pop(field_name)
