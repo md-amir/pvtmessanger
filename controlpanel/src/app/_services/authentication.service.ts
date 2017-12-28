@@ -4,10 +4,10 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw'
 import { Subject } from 'rxjs/Subject';
-import { ApiService } from "app/_services/api.service";
-import FunUtils from "app/_helper/utils";
-import { StorageService } from "app/_services/storage.service";
-import { LoginResponse } from "app/_rmodel/response";
+import { ApiService } from "./api.service";
+import FunUtils from "../_helper/utils";
+import { StorageService } from "./storage.service";
+import { LoginResponse } from "../_rmodel/response";
 
 @Injectable()
 export class AuthenticationService {

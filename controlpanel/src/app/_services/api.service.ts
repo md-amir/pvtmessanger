@@ -4,8 +4,9 @@ import { Http, Response, RequestOptions, Headers, Request, RequestMethod } from 
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw'
-import FunUtils from "app/_helper/utils";
-import { StorageService } from "app/_services/storage.service";
+import FunUtils from "../_helper/utils";
+import {StorageService} from "./storage.service";
+
 
 @Injectable()
 export class ApiService {
@@ -35,10 +36,10 @@ export class ApiService {
     return this.http.post(url, formData, options)
       .map(res => res.json())
       .catch(this.handleError);
-      
+
   }
-  
-  // POST REQUEST WITH THREE ARGUMENTS 
+
+  // POST REQUEST WITH THREE ARGUMENTS
   PostRequestWithToken(url, data) {
     let token = this.storageService.read(FunUtils.TOKEN);
     this.headers = new Headers();
@@ -106,11 +107,11 @@ export class ApiService {
   getRequestWithToken(url) {
     let token = this.storageService.read(FunUtils.TOKEN);
     let authorization = 'Token '+token
-  
+
     this.headers = new Headers();
     this.headers.append("Authorization", authorization);
     this.headers.append("Content-Type", "application/json");
-   
+
 
     this.requestoptions = new RequestOptions({
       method: RequestMethod.Get,

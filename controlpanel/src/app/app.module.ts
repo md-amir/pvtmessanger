@@ -6,10 +6,10 @@ import { ReactiveFormsModule } from '@angular/forms'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 //services
 import { AuthenticationService,  } from './_services/authentication.service';
-import { ApiService } from "app/_services/api.service";
-import { StorageService } from "app/_services/storage.service";
-import { AuthGuard } from "app/_guards/auth.guard";
-import { AccountService } from "app/_services/account.service";
+import { ApiService } from "./_services/api.service";
+import { StorageService } from "./_services/storage.service";
+import { AuthGuard } from "./_guards/auth.guard";
+import { AccountService } from "./_services/account.service";
 //components
 import { AppComponent } from './app.component';
 import { AuthenticationComponent } from './authentication/authentication.component';
@@ -18,7 +18,8 @@ import { AuthenticationComponent } from './authentication/authentication.compone
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    AuthenticationComponent
   ],
 
   imports: [

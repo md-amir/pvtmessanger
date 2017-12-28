@@ -2,8 +2,8 @@ import { Component, OnInit,  NgZone } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Router} from '@angular/router';
 import { AuthenticationService } from '../_services/authentication.service';
-import { StorageService } from "app/_services/storage.service";
-import FunUtils from "app/_helper/utils";
+import { StorageService } from "../_services/storage.service";
+import FunUtils from "../_helper/utils";
 
 @Component({
 
