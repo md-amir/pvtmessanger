@@ -75,7 +75,7 @@ export class ApiService {
     let result = this.http.request(new Request(this.requestoptions))
       .map((response: Response) => response.json())
       .catch(this.handleError);
-    console.log(result);
+    // console.log(result);
     return result;
   }
 

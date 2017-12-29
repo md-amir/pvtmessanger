@@ -1,27 +1,15 @@
 import { NgModule, ModuleWithProviders } from '@angular/core'
 import { RouterModule, Routes } from '@angular/router';
-import FunUtils from "../app/_helper/utils";
+import Chattils from "../app/_helper/utils";
 import { LoginComponent } from '../app/login/login.component'
+import { HomeComponent } from './home/home.component';
+import { AuthGuard } from './_guards/auth.guard';
 
 const appRoutes : Routes =
   [
-    { path: FunUtils.BASE, component: LoginComponent },
-    
+    { path: Chattils.BASE, component: LoginComponent },
+    { path: Chattils.HOME, component: HomeComponent, canActivate: [AuthGuard]},
   ];
 
-// const appRoutes: Routes = [
-//     { path: FunUtils.LOGIN, component: LoginComponent },
-     
-// ]
 
-// @NgModule({
-//     imports: [
-//         RouterModule.forRoot(routes),
-//     ],
-//     exports: [
-//         RouterModule
-//     ]
-// })
-// export class AppRoutingModule { }
-// export const routingComponents = [     ]
 export const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);

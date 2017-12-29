@@ -2,7 +2,7 @@ import { Component, OnInit, NgZone } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthenticationService } from '../_services/authentication.service';
-import FunUtils from '../_helper/utils';
+import ChatUtils from '../_helper/utils';
 
 
 @Component({
@@ -32,9 +32,9 @@ export class LoginComponent implements OnInit {
 
     this.auth_service.rest_login_call(this.loginForm.value.userName, this.loginForm.value.password).subscribe(
       resLogin => {
-        if (resLogin.success == true) {
+        if (resLogin.status == true) {
           this.auth_service.authenticate(resLogin)
-          this.zone.run(() => this.router.navigate([FunUtils.HOME]));
+          this.zone.run(() => this.router.navigate([ChatUtils.HOME]));
 
         } else {
           console.log(resLogin.message)
