@@ -1,0 +1,25 @@
+
+  <div class="container">
+    <form [formGroup]="loginForm" (ngSubmit)="login_submit()">
+        <h1 >Int-cHat</h1>
+      <div class="group">
+        <input type="text" formControlName="userName" #refUserName placeholder=" user name"><span class="highlight" ></span><span class="bar"></span>
+        
+        <div *ngIf="loginForm.controls['userName'].hasError('required') && refUserName.touched" class="alert alert-danger">
+            please enter user name
+        </div>
+        <div *ngIf="loginForm.controls['userName'].hasError('minlength')" class="alert alert-danger">
+            please enter at least 4 characters
+        </div>
+      </div>
+      <div class="group">
+        <input type="password" placeholder="password" formControlName="password" #refPassword ><span class="highlight"></span><span class="bar"></span>
+        <div *ngIf="loginForm.controls['password'].hasError('minlength')" class="alert alert-danger">
+            please enter at least 6 characters
+        </div>
+      </div>
+      <button type="submit" class="button buttonBlue" [disabled]="loginForm.invalid">Login
+        <div class="ripples buttonRipples"><span class="ripplesCircle"></span></div>
+      </button>
+    </form>
+</div>

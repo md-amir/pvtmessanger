@@ -1,41 +1,41 @@
 //modules
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms'
+import { ReactiveFormsModule, FormsModule } from '@angular/forms'
 // import { HttpModule } from '@angular/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-//services
-import { AuthenticationService,  } from './_services/authentication.service';
-import { ApiService } from "./_services/api.service";
-import { StorageService } from "./_services/storage.service";
-import { AuthGuard } from "./_guards/auth.guard";
-import { AccountService } from "./_services/account.service";
-//components
 import { AppComponent } from './app.component';
-import { AuthenticationComponent } from './authentication/authentication.component';
+import { LoginComponent } from './login/login.component';
+import { routing } from './app-routing.module';
+import { HttpModule } from '@angular/http';
+import { StorageService } from './_services/storage.service';
+import { ApiService } from './_services/api.service';
+import { AuthenticationService } from './_services/authentication.service';
+
 
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    AuthenticationComponent
-  ],
+    LoginComponent,
+   ],
 
   imports: [
     BrowserModule,
+    HttpModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-
-  ],
-  entryComponents: [AuthenticationComponent],
-
+    FormsModule,
+    routing    
+ ],
+  
   providers: [
     AuthenticationService,
     ApiService,
     StorageService,
-    AuthGuard,
-    AccountService,
+    // AuthGuard,
+    // AccountService,
     ],
   bootstrap: [AppComponent]
 })

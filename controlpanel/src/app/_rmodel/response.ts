@@ -1,3 +1,4 @@
+
 export class  User {
     public id: number;
     public email: string;
@@ -17,13 +18,4 @@ export class LoginResponse {
     public user: User;
     public success: boolean;
     public message: string;
-}
-
-export class Product {
-  public id: number;
-  public name: string;
-  public price: string;
-  public large_image: string;
-  public small_image: string;
-  public status: boolean;
 }
