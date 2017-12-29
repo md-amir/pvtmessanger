@@ -1,5 +1,4 @@
 from django.contrib.auth.models import BaseUserManager
-
 from pvtmessager.utils import generate_user_name
 
 
@@ -8,7 +7,7 @@ class AppUserManager(BaseUserManager):
 
     def _create_user(self, username, email, password, **extra_fields):
         if not username:
-            # raise ValueError('The given username must be set')
+            # username not provided, so generate a user name
             username = generate_user_name()
 
         email = self.normalize_email(email)
@@ -18,12 +17,22 @@ class AppUserManager(BaseUserManager):
         return user
 
     def create_user(self, username, email=None, password=None, **extra_fields):
+        """
+
+        :param username:
+        :param email:
+        :param password:
+        :param extra_fields:
+        :call for creating user and return created user
+        """
         extra_fields.setdefault('is_staff', False)
         extra_fields.setdefault('is_superuser', False)
-
         return self._create_user(username, email, password, **extra_fields)
 
     def create_superuser(self, email, password, username,**extra_fields):
+        """
+           creating super user
+        """
         extra_fields.setdefault('is_staff', True)
         extra_fields.setdefault('is_superuser', True)
 

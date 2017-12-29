@@ -43,13 +43,16 @@ def api_login(request, version):
         return Response({"status": False,
                          "message": "password or username is not valid"})
 
+    # check authentication
     user = authenticate(username=username, password=password)
 
     if not user:
+        # authentication failed return message
         return Response({"status": False,
                          "message": "User not found"})
 
     if user.is_active:
+        # activeness check
         token = Token.objects.get(user_id=user.id)
 
         return Response({"status": True,
@@ -68,12 +71,12 @@ def api_login(request, version):
 @api_view(['POST'])
 def api_get_all_users(request, version):
     """
-
     :param request:
     :param version:
     :return: all users sorting according to name Alphabetical order
     """
-    users = AppUser.objects.all().order_by('username')
+    me = request.user  # logged user
+    users = AppUser.objects.all().order_by('username').exclude(pk=me.id)
     return Response({'status': True, 'users': UserSerializer(users, many=True,
                                                              remove_fields=['password', 'id', 'last_login', 'is_active',
                                                                             'is_staff', 'is_superuser', 'first_name',

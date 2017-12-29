@@ -5,18 +5,29 @@ from chat.models import Conversation, Message
 class ConversationSerializer(serializers.ModelSerializer):
 
     def __init__(self, *args, **kwargs):
+        """
+                constructor : helps to remove field dynamically
+        """
         remove_fields = kwargs.pop('remove_fields', None)
         super(ConversationSerializer, self).__init__(*args, **kwargs)
 
         if remove_fields:
-            # dynamically remove field during serializing
-            # for multiple fields in a list
+            """
+            * dynamically remove field during serialization
+            * for multiple fields in a list
+            """
             for field_name in remove_fields:
                 self.fields.pop(field_name)
 
     messages = serializers.SerializerMethodField()
 
     def get_messages(self, conversation):
+
+        """
+        :param conversation:
+        :return: last 10 message sorted according to modified date. last modified message
+        stands first
+        """
         _messages = Message.objects \
                         .filter(conversation=conversation) \
                         .order_by('-modified_date')[:10]
@@ -31,12 +42,17 @@ class ConversationSerializer(serializers.ModelSerializer):
 class MessageSerializer(serializers.ModelSerializer):
 
     def __init__(self, *args, **kwargs):
+        """
+            constructor : helps to remove field dynamically
+        """
         remove_fields = kwargs.pop('remove_fields', None)
         super(MessageSerializer, self).__init__(*args, **kwargs)
 
         if remove_fields:
-            # dynamically remove field during serializing
-            # for multiple fields in a list
+            """
+            * dynamically remove field during serialization
+            * for multiple fields in a list
+            """
             for field_name in remove_fields:
                 self.fields.pop(field_name)
 

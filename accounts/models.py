@@ -68,14 +68,12 @@ class AppUser(AbstractBaseUser, PermissionsMixin):
         abstract = False
 
     def get_full_name(self):
-        # return self.username
+        # return full name
         return "%s %s" % (self.first_name, self.last_name) if (self.first_name or self.last_name) else self.username
 
     def get_short_name(self):
+        # returns short name
         return self.username
-
-    def email_user(self, subject, message, from_email=None, **kwargs):
-        send_mail(subject, message, from_email, [self.email], **kwargs)
 
     def __str__(self):
         return self.username

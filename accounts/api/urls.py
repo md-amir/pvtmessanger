@@ -4,8 +4,7 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('amir', views.api_testing_django_rest),
-    url(r'login', views.api_login),
-    url(r'users', views.api_get_all_users),
+    url(r'login', views.api_login),  # for login
+    url(r'users', views.api_get_all_users),  # for all users request without requester
 
 ]
