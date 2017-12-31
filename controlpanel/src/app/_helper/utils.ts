@@ -5,24 +5,28 @@ export default class ChatUtils {
     /**
      * Different url for rest api
      */
-   
+
     static BASE_URL = 'http://localhost:8000';
     static API_REST_LOGIN = ChatUtils.BASE_URL+ '/accounts/api/v1/login';
-   
+    static API_REST_ALL_USER = ChatUtils.BASE_URL+ '/accounts/api/v1/users';
+    static API_GET_INDIVIDUAL_CONVERSATION = ChatUtils.BASE_URL+ '/chat/api/v1/individual/conversation';
+    static REST_SEND_MESSAGE = ChatUtils.BASE_URL + '/chat/api/v1/send/message';
+
     //FOR web CLIENT
     static BASE = '';
     static LOGIN = 'login';
     static HOME = 'home';
-   
+
     /**
      * constants
-     * 
+     *
      */
 
     // keys
     static REFERRAL_TYPE_KEY = 'referral_type';
     static REFERRAL_TOKEN_KEY = "referral_token_key";
-    
+    static SELECTED_USER_ID = "selected_user_id"
+
 
     // values
     static IS_LOGGED_IN = 'isLoggedIn';
@@ -37,7 +41,7 @@ export default class ChatUtils {
 
 
 
-    // methods
+    // methods for uploading data for pre processing
     static prepare_file_upload(event, file_name, companyId, storageService) {
         let fileList = event.target.files;
         let formData = new FormData();
@@ -56,14 +60,14 @@ export default class ChatUtils {
     }
 
     static prepare_file_upload1(formData,storageService) {
-        
+
             let headers = new Headers();
             let token = <string>storageService.read(ChatUtils.TOKEN);
             headers.append("Authorization", 'Token ' + token)
             headers.append('Accept', 'application/json');
             let options = new RequestOptions({ headers: headers });
             return { formData: formData, options: options }
-        
+
     }
 
 }

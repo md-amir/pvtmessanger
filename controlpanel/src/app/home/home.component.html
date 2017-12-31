@@ -1,31 +1,55 @@
-<div class="col-lg-6 fblue col-lg-offset-3">
-  <div class="container">
-    <div class="row">
-    
-      <div class="col-lg-3 fgreen">
-
-
-      </div>
-      
-      <div class="col-lg-col-9 fred">
-        <div class="container">
-          <div class="row ">
-            <div class="col-md-11 well">
-              <img src="/assets/amir.jpeg" alt="Avatar" >
-              <p>Hello. How are you today?</p>
-              <span class="time-right">11:00</span>
-            </div>
-
-
-            <div class="col-md-11 well">
-              <img src="/assets/amir.jpeg" alt="Avatar" class="right">
-              <p>Hey! I'm fine. Thanks for asking!</p>
-              <span class="time-left">11:00</span>
-            </div>
-          </div>
+<div class="col-lg-5 col-md-5 col-sm-5 col-xs-5  col-lg-offset-4 col-md-offset-3 col-sm-offset-2 col-xs-offset-1 ">
+    <!--fblack-->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12 fheight150"></div>
         </div>
-      </div>
-    
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12  fheader"> <!--fred-->
+                <p>{{ headerName }}</p>
+                <img class="img-circle" width="50" height="50" src="{{ headerImage }}" alt="{{ headerName }}">
+                <button class="btn btn-primary" (click)="logOut()">Log Out</button>
+            </div>
+        </div>
+        <div class="row body-color">
+            <div class="container-fluid" id="lower-part"> <!--fgreen-->
+                <div class="row">
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 fgray "> <!--fwhite-->
+                        <div class="container-fluid">
+                            <div class="row" *ngFor="let user of users" (click)="load_conversation($event, user)">
+
+                                <div class="col-lg-12 user-cell">
+                                    <img class="img-circle" src="{{ user.image }}" alt="Avatar">
+                                    <span style="margin-left: 10px ">{{ user.username }}</span>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 fwhite" id="detail-container"> <!--fblue-->
+                        <div class="container-fluid">
+                            <div class="row" *ngFor="let message of messages">
+                                <div class="col-lg-12 conversation-container">
+                                    <img class="img-circle conversation-image" src="{{message.image}}"  alt="Avatar">
+                                    <span>{{ message.text }}</span>
+                                    <br><span class="time-right">{{ message.created_date |  date:'MM/dd/yyyy'}}</span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div style="background: #3c7673;height: 50px; padding-left: 252px;">
+
+                    <input type="text" class="form-control" style="border-radius: 0px; height: 50px"
+                            #messageBox (keyup.enter)="sendMessage(messageBox.value);messageBox.value=''"/>
+
+            </div>
+        </div>
+        <div class="row fheight100">
+
+        </div>
     </div>
-  </div>
 </div>

@@ -144,3 +144,29 @@ input.ng-valid {border-left: 5px solid green}
   right: 0;
   overflow: auto;
 }
+
+.fheader{
+    background: #b167ca;
+    height: 100px;
+    text-align: center;
+
+}
+.fheader p{
+    margin: 5px auto;
+    font-size: 15px;
+    color: white;
+    font-family: cursive;
+
+}
+.fheader button{
+  float: left;
+}
+.fheader img{
+  float: right;
+  margin-bottom: 20px;
+}
+.fgreen{
+    background: green;
+    min-height: 100px !important;
+}
+

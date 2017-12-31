@@ -1,42 +1,167 @@
-body {
-    margin: 0 auto;
-    max-width: 800px;
-    padding: 0 20px;
+.fhomeheader{
+    display:flex;
+    align-items: center;
+    justify-content:center;
+    min-height: 500px
+
+}
+.fhomeheader h1,h3{
+    text-align: center;
+
 }
 
-
-
-.darker {
-    border-color: #ccc;
-    background-color: #ddd;
+.fhomeheader   button{
+    position:relative;
+    top:50%;
+    left:40%;
+    margin-top: 50px;
 }
 
-.container::after {
-    content: "";
-    clear: both;
-    display: table;
-}
-
-.container img {
-    float: left;
-    max-width: 60px;
-    width: 100%;
-    margin-right: 20px;
-    border-radius: 50%;
-}
-
-.container img.right {
+.time-right{
     float: right;
-    margin-left: 20px;
-    margin-right:0;
+    margin: 0px 10px;
 }
 
-.time-right {
-    float: right;
-    color: #aaa;
-}
-
-.time-left {
+.time-left{
     float: left;
     color: #999;
+    margin-top: 70px;
+
 }
+
+
+.fgray img{
+    margin: 15px 0;
+    width: 50px;
+    height: 50px;
+}
+
+.conversation-image{
+    margin: 15px 15px;
+    width: 60px;
+    height: 60px;
+}
+.image-left{
+    float: left;
+}
+.image-right{
+    float: right;
+}
+.fwhite p
+{
+    margin-top: 31px;
+    font-size: 18px;
+}
+
+.cell-pad{
+    padding: 1px;
+}
+.main-body{
+    height: 250px;
+}
+.conversation-container{
+    margin: 0 0;
+    padding: 0px 5px 5px 0px;
+}
+.conversation-container span span{
+    margin-right: 15px;
+    float: right;
+}
+.body-color{
+    border: 1px solid #006666
+}
+.fyellow{
+    background: yellow;
+    min-height: 100px !important;
+}
+.fblue{
+    background: blue;
+    min-height: 100px !important;
+}
+.fblack{
+    background: black;
+    min-height: 100px !important;
+}
+.fwhite{
+    background: white;
+    height: 500px
+}
+.flvertical-line{
+    width: 3px;
+    background-color: #d0cdcd;
+}
+.fgray{
+    background: #f1f1f1;
+    height: 500px;
+    overflow-y:  scroll;
+    z-index: 200;
+}
+.fcenter{
+  display:flex;
+  align-items: center;
+  justify-content:center;
+}
+.fun-box{
+    background: #fa0078;
+    min-height: 20px;
+    padding: 19px;
+    margin-bottom: 20px;
+    border: 1px solid #e3e3e3;
+    border-radius: 4px;
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.05);
+}
+.fhr{
+    background: #d0cdcd;
+    height: 2px;
+}
+.fclear{
+    padding: 0px;
+    margin: 0px;
+}
+
+.fullscreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  overflow: auto;
+}
+#lower-part,
+#lower-part .row,
+#lower-part .fgray,
+#lower-part .fgray .container-fluid{
+    margin: 0 0;
+    padding: 0 0;
+}
+
+.user-cell{
+    margin: 0;
+    padding: 0
+}
+.user-cell img{
+    margin: 10px;
+}
+.user-cell:hover,
+.conversation-container:hover{
+    background: #ccccff;
+    cursor: default;
+}
+.user-cell:active,
+.conversation-container:active{
+    background: #cccccf
+}
+#detail-container
+{
+    margin: 0 0;
+    padding: 0 0;
+    overflow-y: scroll;
+
+}
+
+
+#detail-container .container-fluid{
+    margin: 0 0;
+    padding: 0 0;
+    }
+

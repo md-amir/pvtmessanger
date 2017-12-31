@@ -5,20 +5,20 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw'
 import { Subject } from 'rxjs/Subject';
-import { ApiService } from "../_services/api.service";
+import { ApiService } from "./api.service";
 import ChatUtils from "../_helper/utils";
-import { StorageService } from "../_services/storage.service";
+import { StorageService } from "./storage.service";
 import { LoginResponse } from "../_rmodel/response";
 
 @Injectable()
 export class AuthenticationService {
     RESET_PASSWORD: string;
     REST_LOGIN_URL: string;
-    
+
 
     constructor(private api: ApiService, private storageService: StorageService) {
         this.REST_LOGIN_URL = ChatUtils.API_REST_LOGIN;
-        
+
     }
 
     // messenger login
@@ -56,5 +56,8 @@ export class AuthenticationService {
 
     token(){
         return this.storageService.read(ChatUtils.TOKEN);
+    }
+    loggedinUser(){
+      return this.storageService.read(ChatUtils.USER)
     }
 }

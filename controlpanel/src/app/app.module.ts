@@ -12,6 +12,7 @@ import { ApiService } from './_services/api.service';
 import { AuthenticationService } from './_services/authentication.service';
 import { AuthGuard } from './_guards/auth.guard';
 import { HomeComponent } from './home/home.component';
+import {HomeService} from "./_services/home.service";
 
 
 
@@ -29,15 +30,15 @@ import { HomeComponent } from './home/home.component';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     FormsModule,
-    routing    
+    routing
  ],
-  
+
   providers: [
     AuthenticationService,
     ApiService,
     StorageService,
     AuthGuard,
-    // AccountService,
+    HomeService,
     ],
   bootstrap: [AppComponent]
 })

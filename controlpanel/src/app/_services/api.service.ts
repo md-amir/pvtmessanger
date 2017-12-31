@@ -4,7 +4,7 @@ import { Http, Response, RequestOptions, Headers, Request, RequestMethod } from 
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw'
-import FunUtils from "../_helper/utils";
+import ChatUtils from "../_helper/utils";
 import { StorageService } from "./storage.service";
 
 @Injectable()
@@ -14,16 +14,16 @@ export class ApiService {
   constructor(private http: Http, private requestoptions: RequestOptions, private storageService: StorageService) { }
 
   call(url: string, callType: any, data?: any,formData?:any,options?:any) {
-    if (callType == FunUtils.GET_REQUEST_WITHOUT_TOKEN) {
+    if (callType == ChatUtils.GET_REQUEST_WITHOUT_TOKEN) {
       return this.getRequestWithoutToken(url);
     }
-    else if (callType == FunUtils.POST_REQUEST_WITHOUT_TOKEN) {
+    else if (callType == ChatUtils.POST_REQUEST_WITHOUT_TOKEN) {
       return this.postRequestWithoutToken(url, data);
-    } else if (callType == FunUtils.POST_REQUEST_WITH_TOKEN) {
+    } else if (callType == ChatUtils.POST_REQUEST_WITH_TOKEN) {
       return this.PostRequestWithToken(url, data);
-    } else if (callType == FunUtils.GET_REQUEST_WITH_TOKEN) {
+    } else if (callType == ChatUtils.GET_REQUEST_WITH_TOKEN) {
       return this.getRequestWithToken(url);
-    } else if (callType == FunUtils.POST_REQUEST_FOR_FILE_UPLOAD) {
+    } else if (callType == ChatUtils.POST_REQUEST_FOR_FILE_UPLOAD) {
       return this.PostRequestToUploadFile(url,formData,options);
     } else {
       return null;
@@ -35,12 +35,12 @@ export class ApiService {
     return this.http.post(url, formData, options)
       .map(res => res.json())
       .catch(this.handleError);
-      
+
   }
-  
-  // POST REQUEST WITH THREE ARGUMENTS 
+
+  // POST REQUEST WITH THREE ARGUMENTS
   PostRequestWithToken(url, data) {
-    let token = this.storageService.read(FunUtils.TOKEN);
+    let token = this.storageService.read(ChatUtils.TOKEN);
     this.headers = new Headers();
     this.headers.append("Content-Type", 'application/json');
     this.headers.append("Authorization", 'Token ' + token)
@@ -104,13 +104,13 @@ export class ApiService {
   }
 
   getRequestWithToken(url) {
-    let token = this.storageService.read(FunUtils.TOKEN);
+    let token = this.storageService.read(ChatUtils.TOKEN);
     let authorization = 'Token '+token
-  
+
     this.headers = new Headers();
     this.headers.append("Authorization", authorization);
     this.headers.append("Content-Type", "application/json");
-   
+
 
     this.requestoptions = new RequestOptions({
       method: RequestMethod.Get,
