@@ -24,16 +24,14 @@ class ConversationSerializer(serializers.ModelSerializer):
 
         """
         :param conversation:
-        :return: last 10 message sorted according to modified date. last modified message
+        :return: last 10 message sorted according to created date in decending . last modified message
         stands first
         """
         _messages = Message.objects \
                         .filter(conversation=conversation) \
-                        .order_by('-modified_date')[:10]
+                        .order_by('-created_date')[:10][::-1]
 
         return MessageSerializer(_messages, many=True, remove_fields=['conversation', 'is_deleted']).data
-
-
 
     class Meta:
         model = Conversation
@@ -57,7 +55,8 @@ class MessageSerializer(serializers.ModelSerializer):
                 self.fields.pop(field_name)
 
     image = serializers.SerializerMethodField()
-    def get_image(self,message):
+
+    def get_image(self, message):
         if message.sender.image:
             return message.sender.image.url
         else:

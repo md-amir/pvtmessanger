@@ -51,7 +51,7 @@ def api_send_message(request, version):
         return api_status_response(False, "It is just you. can't send message to yourself")
 
     our_conversations = Conversation.objects \
-        .filter(subscriber__id__in=[me.id])\
+        .filter(subscriber__id__in=[me.id]) \
         .filter(subscriber__id__in=[receiver_id])
 
     if our_conversations.count() >= 1:
@@ -80,14 +80,14 @@ def api_get_individual_conversation(request, version):
     try:
         selected_user = AppUser.objects.get(pk=selected_user_id)
     except:
-        return api_status_response(False,"user with this selected id not found")
+        return api_status_response(False, "user with this selected id not found")
 
     if selected_user_id is None:
         # selected user id is missing here. returns error message
         return api_status_response(False, 'please select user first')
 
-    our_conversations = Conversation.objects.filter(subscriber__id__in=[me.id], is_deleted=False,is_archived=False)\
-                                             .filter(subscriber__id__in=[selected_user_id])
+    our_conversations = Conversation.objects.filter(subscriber__id__in=[me.id], is_deleted=False, is_archived=False) \
+        .filter(subscriber__id__in=[selected_user_id])
 
     if our_conversations.count() >= 1:
         # get the first conversation for now
