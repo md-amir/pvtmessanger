@@ -3,7 +3,6 @@ from chat.models import Conversation, Message
 
 
 class ConversationSerializer(serializers.ModelSerializer):
-
     def __init__(self, *args, **kwargs):
         """
                 constructor : helps to remove field dynamically
@@ -34,13 +33,14 @@ class ConversationSerializer(serializers.ModelSerializer):
 
         return MessageSerializer(_messages, many=True, remove_fields=['conversation', 'is_deleted']).data
 
+
+
     class Meta:
         model = Conversation
         fields = '__all__'
 
 
 class MessageSerializer(serializers.ModelSerializer):
-
     def __init__(self, *args, **kwargs):
         """
             constructor : helps to remove field dynamically
@@ -55,6 +55,13 @@ class MessageSerializer(serializers.ModelSerializer):
             """
             for field_name in remove_fields:
                 self.fields.pop(field_name)
+
+    image = serializers.SerializerMethodField()
+    def get_image(self,message):
+        if message.sender.image:
+            return message.sender.image.url
+        else:
+            return None
 
     class Meta:
         model = Message

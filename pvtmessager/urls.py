@@ -16,6 +16,8 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 from django.urls import path, include
+from django.conf import settings
+from django.views.static import serve
 
 import accounts
 
@@ -26,4 +28,4 @@ urlpatterns = [
     url(r'^chat/api/(?P<version>(v1|v2))/', include('chat.api.urls')),  # for rest api
     path('admin/', admin.site.urls),
 
-]
+]+ [url(r'^media/(?P<path>.*)$', serve,{'document_root' : settings.MEDIA_ROOT,}),]

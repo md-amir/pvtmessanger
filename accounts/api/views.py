@@ -68,7 +68,7 @@ def api_login(request, version):
         })
 
 
-@api_view(['POST'])
+@api_view(['GET'])
 def api_get_all_users(request, version):
     """
     :param request:
@@ -78,7 +78,7 @@ def api_get_all_users(request, version):
     me = request.user  # logged user
     users = AppUser.objects.all().order_by('username').exclude(pk=me.id)
     return Response({'status': True, 'users': UserSerializer(users, many=True,
-                                                             remove_fields=['password', 'id', 'last_login', 'is_active',
+                                                             remove_fields=['password', 'last_login', 'is_active',
                                                                             'is_staff', 'is_superuser', 'first_name',
                                                                             'last_name', 'groups', 'user_permissions',
                                                                             'date_joined']).data})
