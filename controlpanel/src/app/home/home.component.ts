@@ -30,7 +30,7 @@ export class HomeComponent implements OnInit {
               private authService: AuthenticationService,
               private zone: NgZone,
               private homeService: HomeService,
-               private _formBuilder: FormBuilder,
+              private _formBuilder: FormBuilder,
               private storageService:StorageService) {
   }
 
@@ -66,14 +66,18 @@ export class HomeComponent implements OnInit {
   }
 
   public sendMessage(value: string){
+    // let aMessage = new Message()
     // let receiver_id = this.storageService.read(ChatUtils.SELECTED_USER_ID)
     let receiver_id =this.selectedUserId;
     let text = value;
+
+
+
     let data = {"receiver_id": receiver_id, "text":text};
     this.homeService.sendMessage(data)
       .subscribe(response => {
         if (response.status == true) {
-
+            this.messages.push({"text":text,"image":this.loggedInUser.image})
         } else {
         }
       });
