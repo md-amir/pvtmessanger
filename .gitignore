@@ -17,6 +17,5 @@ tests/.coverage
 build/
 tests/report/
 finalvr
-static
-media
 .idea
+static
