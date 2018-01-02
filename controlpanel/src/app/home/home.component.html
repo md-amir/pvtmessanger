@@ -9,7 +9,8 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-lg-3 ">
-                            <a href="/home"><img src="http://127.0.0.1:8000/media/upload/logo.png" class="logo" width="70" height="70"></a>
+                            <a href="/home"><img src="http://127.0.0.1:8000/media/upload/logo.png" class="logo"
+                                                 width="70" height="70"></a>
                         </div>
                         <div class="col-lg-6 ">
                             <h3>{{ headerMessage }}</h3>
@@ -47,23 +48,51 @@
                         </div>
                     </div>
 
-                    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 fwhite" id="detail-container"> <!--fblue-->
+
+                    <!--  *****************-->
+                    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 fwhite" id="detail-container">
                         <div class="container-fluid">
                             <div class="row" *ngFor="let message of messages">
-                                <div class="col-lg-12 conversation-container">
-                                    <img class="img-circle conversation-image" src="{{ message.image }}" alt="Avatar">
-                                    <span>{{ message.text }}</span>
-                                    <br><span class="time-right">{{ message.created_date |  date:'MM/dd/yyyy:hh:mm' }}</span>
-                                </div>
+                                <div class="col-lg-12 conversation-container from-sender">
+                                    <div class="container-fluid">
+                                        <div class="row" *ngIf="message.sender === selectedUserId">
+                                            <!-- sender part-->
+                                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                                                <img class="img-circle" src="{{ message.image }}" alt="Avatar"
+                                                     id="sender-image">
+                                            </div>
+                                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                                                <p id="text-from-sender">{{ message.text }}</p>
+                                            </div>
+                                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                                                <p id="time-sender">{{ message.created_date | date:'hh:mm' }}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row" *ngIf="message.sender != selectedUserId">
+                                            <!-- recever part-->
+                                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                                                <p id="time-my">{{ message.created_date | date:'hh:mm' }}</p>
+                                            </div>
+                                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                                                <p id="text-from-me">{{ message.text }}</p>
+                                            </div>
+                                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                                                <img class="img-circle" src="{{ message.image }}" alt="Avatar"
+                                                     id="my-image">
 
-                                <div class="col-lg-12 conversation-container">
-                                    <img class="img-circle conversation-image" src="{{ message.image }}" alt="Avatar">
-                                    <span>{{ message.text }}</span>
-                                    <br><span class="time-right">{{ message.created_date |  date:'MM/dd/yyyy:hh:mm' }}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
                                 </div>
                             </div>
                         </div>
+
                     </div>
+
+
+                    <!-- ********************** -->
+
 
                 </div>
             </div>
