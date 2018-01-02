@@ -12,6 +12,8 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
+
+
 export class HomeComponent implements OnInit {
   users: any;
   conversation: any;
@@ -23,7 +25,7 @@ export class HomeComponent implements OnInit {
   loggedInUser: any;
   headerImage: string;
   headerName: string;
-  headerMessage:string;
+  headerMessage: string;
   messageValue: string;
   hidInbox: boolean;
 
@@ -97,7 +99,6 @@ export class HomeComponent implements OnInit {
   }
 
 
-
   public sendMessage(value: string) {
     // let aMessage = new Message()
     // let receiver_id = this.storageService.read(ChatUtils.SELECTED_USER_ID)
@@ -117,18 +118,21 @@ export class HomeComponent implements OnInit {
 
   }
 
+
   public logOut() {
     this.authService.logOut();
     this.zone.run(() => this.router.navigate([ChatUtils.LOGIN]));
   }
 
-  isNotEmptyObject(obj) {
-  return !(obj && (Object.keys(obj).length === 0));
-}
 
-  public load_conversation_by_id(conversationId){
+  isNotEmptyObject(obj) {
+    return !(obj && (Object.keys(obj).length === 0));
+  }
+
+
+  public load_conversation_by_id(conversationId) {
     let id = conversationId
-    let data = {"id":id}
+    let data = {"id": id}
 
     this.homeService.ConversationById(data)
       .subscribe(response => {
@@ -137,11 +141,9 @@ export class HomeComponent implements OnInit {
           this.conversation = response.conversation;
           this.messages = this.conversation.messages;
           this.selectedUserId = response.counterpart;
-
+          this.headerMessage = "Chatting Room";
         } else {
         }
       });
   }
-
-
 }

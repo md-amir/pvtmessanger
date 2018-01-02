@@ -24,12 +24,12 @@ class ConversationSerializer(serializers.ModelSerializer):
 
         """
         :param conversation:
-        :return: last 10 message sorted according to created date in decending . last modified message
+        :return: last 30 message sorted according to created date in decending . last modified message
         stands first
         """
         _messages = Message.objects \
                         .filter(conversation=conversation) \
-                        .order_by('-created_date')[:10][::-1]
+                        .order_by('-created_date')[:30][::-1]
 
         return MessageSerializer(_messages, many=True, remove_fields=['conversation', 'is_deleted']).data
 
