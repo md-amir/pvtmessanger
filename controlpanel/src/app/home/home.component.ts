@@ -15,15 +15,17 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 export class HomeComponent implements OnInit {
   users: any;
   conversation: any;
+  inbox_conversations: any;
   messages: any;
   options: any;
   errorMessage: string;
   selectedUserId: number;
   loggedInUser: any;
-  headerImage:string;
-  headerName:string;
-  messageValue:string;
-  // sendForm: FormGroup;
+  headerImage: string;
+  headerName: string;
+  headerMessage:string;
+  messageValue: string;
+  hidInbox: boolean;
 
   constructor(private router: Router,
               private route: ActivatedRoute,
@@ -31,7 +33,7 @@ export class HomeComponent implements OnInit {
               private zone: NgZone,
               private homeService: HomeService,
               private _formBuilder: FormBuilder,
-              private storageService:StorageService) {
+              private storageService: StorageService) {
   }
 
   ngOnInit() {
@@ -48,11 +50,26 @@ export class HomeComponent implements OnInit {
     this.headerImage = this.loggedInUser.image;
     this.headerName = this.loggedInUser.username;
     this.messageValue = '';
+    this.hidInbox = true;
+    this.headerMessage = "Chatting Room";
   }
 
-  public load_conversation(event, user) {
-    this.selectedUserId = user.id;
-    // this.storageService.write(ChatUtils.SELECTED_USER_ID,user.id)
+  public load_inbox() {
+    this.hidInbox = false;
+    this.headerMessage = "Recent Conversations";
+    this.homeService.getMyConversationInbox()
+      .subscribe(response => {
+        if (response.status == true) {
+          this.inbox_conversations = response.conversations;
+          // this.messages = this.conversation.messages;
+        } else {
+        }
+      });
+  }
+
+  public load_home() {
+    this.hidInbox = true;
+    this.headerMessage = "Chatting Room";
 
     let data = {"selectedUserId": this.selectedUserId};
     this.homeService.getIndividualConversation(data)
@@ -65,19 +82,34 @@ export class HomeComponent implements OnInit {
       });
   }
 
-  public sendMessage(value: string){
+  public load_conversation_for_this_user(event, user) {
+    this.selectedUserId = user.id;
+    // this.storageService.write(ChatUtils.SELECTED_USER_ID,user.id)
+    let data = {"selectedUserId": this.selectedUserId};
+    this.homeService.getIndividualConversation(data)
+      .subscribe(response => {
+        if (response.status == true) {
+          this.conversation = response.conversation;
+          this.messages = this.conversation.messages;
+        } else {
+        }
+      });
+  }
+
+
+
+  public sendMessage(value: string) {
     // let aMessage = new Message()
     // let receiver_id = this.storageService.read(ChatUtils.SELECTED_USER_ID)
-    let receiver_id =this.selectedUserId;
+    let receiver_id = this.selectedUserId;
     let text = value;
 
 
-
-    let data = {"receiver_id": receiver_id, "text":text};
+    let data = {"receiver_id": receiver_id, "text": text};
     this.homeService.sendMessage(data)
       .subscribe(response => {
         if (response.status == true) {
-            this.messages.push({"text":text,"image":this.loggedInUser.image})
+          this.messages.push({"text": text, "image": this.loggedInUser.image})
         } else {
         }
       });
@@ -85,10 +117,14 @@ export class HomeComponent implements OnInit {
 
   }
 
-  public logOut(){
+  public logOut() {
     this.authService.logOut();
     this.zone.run(() => this.router.navigate([ChatUtils.LOGIN]));
   }
+
+  isNotEmptyObject(obj) {
+  return !(obj && (Object.keys(obj).length === 0));
+}
 
 
 }

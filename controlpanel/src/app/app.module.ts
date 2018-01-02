@@ -13,6 +13,9 @@ import { AuthenticationService } from './_services/authentication.service';
 import { AuthGuard } from './_guards/auth.guard';
 import { HomeComponent } from './home/home.component';
 import {HomeService} from "./_services/home.service";
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 
 
@@ -30,9 +33,12 @@ import {HomeService} from "./_services/home.service";
     ReactiveFormsModule,
     BrowserAnimationsModule,
     FormsModule,
-    routing
+    routing,
+    BsDropdownModule.forRoot(),
+    TooltipModule.forRoot(),
+    ModalModule.forRoot()
  ],
-
+  exports: [BsDropdownModule, TooltipModule, ModalModule],
   providers: [
     AuthenticationService,
     ApiService,

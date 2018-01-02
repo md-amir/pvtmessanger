@@ -10,6 +10,7 @@ export default class ChatUtils {
     static API_REST_LOGIN = ChatUtils.BASE_URL+ '/accounts/api/v1/login';
     static API_REST_ALL_USER = ChatUtils.BASE_URL+ '/accounts/api/v1/users';
     static API_GET_INDIVIDUAL_CONVERSATION = ChatUtils.BASE_URL+ '/chat/api/v1/individual/conversation';
+    static REST_GET_MY_CONVERSATIONS_INBOX = ChatUtils.BASE_URL+ '/chat/api/v1/my/conversations';
     static REST_SEND_MESSAGE = ChatUtils.BASE_URL + '/chat/api/v1/send/message';
 
     //FOR web CLIENT

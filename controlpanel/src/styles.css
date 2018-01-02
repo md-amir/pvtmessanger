@@ -151,8 +151,8 @@ input.ng-valid {border-left: 5px solid green}
     text-align: center;
 
 }
-.fheader p{
-    margin: 5px auto;
+.fheader span{
+    margin-left: 100px !important;
     font-size: 15px;
     color: white;
     font-family: cursive;
@@ -164,6 +164,10 @@ input.ng-valid {border-left: 5px solid green}
 .fheader img{
   float: right;
   margin-bottom: 20px;
+}
+.logo{
+  margin-top:20px;
+  margin-right: 80px;
 }
 .fgreen{
     background: green;

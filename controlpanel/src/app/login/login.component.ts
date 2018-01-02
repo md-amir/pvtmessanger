@@ -12,6 +12,7 @@ import ChatUtils from '../_helper/utils';
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
+  errorMessage:string
 
   constructor(
     private auth_service: AuthenticationService,
@@ -24,9 +25,10 @@ export class LoginComponent implements OnInit {
         userName: [null, [Validators.required, Validators.minLength(4)]],
         password: [null, [Validators.required, Validators.minLength(6)]],
       });
+      this.errorMessage=""
   }
-  
-  
+
+
   login_submit() {
 
 
@@ -38,9 +40,11 @@ export class LoginComponent implements OnInit {
 
         } else {
           console.log(resLogin.message)
+          this.errorMessage = resLogin.message
         }
+
       }
     )
   }
-  
+
 }

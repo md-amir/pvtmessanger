@@ -1,7 +1,7 @@
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from accounts.models import AppUser
-from chat.api.serializers import ConversationSerializer
+from chat.api.serializers import ConversationSerializer, UserConversationSerializer
 from chat.models import Message, Conversation
 from pvtmessager.utils import api_status_response
 
@@ -14,24 +14,27 @@ def test_api_django_rest(request, version):
 
 
 @api_view(['GET'])
-def api_get_all_conversations(request, version):
-    me = request.user
-    conversations = Conversation.objects.filter(subscriber__id__in=[me.id], is_deleted=False, is_archived=False)
-    return Response({"status": True, "conversations": ConversationSerializer(
+def api_get_my_conversations(request, version):
+    """
+    :param request:
+    :param version: v1/v2
+    :return: logged in users conversations with all other users
+    """
+    me = request.user # logged in user
+    conversations = Conversation.objects.filter(subscriber__id__in=[me.id], is_deleted=False, is_archived=False).order_by("-modified_date")
+    return Response({"status": True, "conversations": UserConversationSerializer(
         conversations, many=True, remove_fields=['subscriber', 'is_deleted', 'is_archived', 'created_date']).data})
 
 
 @api_view(['POST'])
 def api_send_message(request, version):
     """
-
     :param request: receiver_id, text
     :param version: v1/v2
     :return: success status and message
 
     search first existing conversation
     create new conversation if not found
-
     """
     receiver_id = request.data.get('receiver_id', None)
     if receiver_id is None:

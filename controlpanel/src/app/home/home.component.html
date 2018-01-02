@@ -6,23 +6,43 @@
         </div>
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12  fheader"> <!--fred-->
-                <p>{{ headerName }}</p>
-                <img class="img-circle" width="50" height="50" src="{{ headerImage }}" alt="{{ headerName }}">
-                <button class="btn btn-primary" (click)="logOut()">Log Out</button>
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-3 ">
+                            <a href="/home"><img src="http://127.0.0.1:8000/media/upload/logo.png" class="logo" width="70" height="70"></a>
+                        </div>
+                        <div class="col-lg-6 ">
+                            <h3>{{ headerMessage }}</h3>
+                        </div>
+                        <div class="col-lg-3 ">
+                            <div class="dropdown" dropdown> <!-- {1} -->
+                                <span>{{ headerName }}</span>
+                                <img src="{{ headerImage }}" class="img-circle" width="60" height="60" dropdownToggle
+                                     role="button"> <!-- {2} -->
+                                <ul *dropdownMenu class="dropdown-menu"> <!-- {3} -->
+                                    <li><a (click)="load_inbox()">Inbox</a></li>
+                                    <li><a (click)="load_home()">Home</a></li>
+                                    <li role="separator" class="divider"></li>
+                                    <li role="separator" class="divider"></li>
+                                    <li><a (click)="logOut()">Log out</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="row body-color">
+        <div class="row body-color" [hidden]="!hidInbox">
             <div class="container-fluid" id="lower-part"> <!--fgreen-->
                 <div class="row">
                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 fgray "> <!--fwhite-->
                         <div class="container-fluid">
-                            <div class="row" *ngFor="let user of users" (click)="load_conversation($event, user)">
-
+                            <div class="row" *ngFor="let user of users"
+                                 (click)="load_conversation_for_this_user($event, user)">
                                 <div class="col-lg-12 user-cell">
                                     <img class="img-circle" src="{{ user.image }}" alt="Avatar">
                                     <span style="margin-left: 10px ">{{ user.username }}</span>
                                 </div>
-
                             </div>
                         </div>
                     </div>
@@ -31,21 +51,42 @@
                         <div class="container-fluid">
                             <div class="row" *ngFor="let message of messages">
                                 <div class="col-lg-12 conversation-container">
-                                    <img class="img-circle conversation-image" src="{{message.image}}"  alt="Avatar">
+                                    <img class="img-circle conversation-image" src="{{ message.image }}" alt="Avatar">
                                     <span>{{ message.text }}</span>
-                                    <br><span class="time-right">{{ message.created_date |  date:'MM/dd/yyyy'}}</span>
+                                    <br><span class="time-right">{{ message.created_date |  date:'MM/dd/yyyy:hh:mm' }}</span>
+                                </div>
+
+                                <div class="col-lg-12 conversation-container">
+                                    <img class="img-circle conversation-image" src="{{ message.image }}" alt="Avatar">
+                                    <span>{{ message.text }}</span>
+                                    <br><span class="time-right">{{ message.created_date |  date:'MM/dd/yyyy:hh:mm' }}</span>
                                 </div>
                             </div>
                         </div>
-
                     </div>
+
                 </div>
             </div>
             <div style="background: #3c7673;height: 50px; padding-left: 252px;">
 
-                    <input type="text" class="form-control" style="border-radius: 0px; height: 50px"
-                            #messageBox (keyup.enter)="sendMessage(messageBox.value);messageBox.value=''"/>
+                <input type="text" class="form-control" style="border-radius: 0px; height: 50px"
+                       #messageBox (keyup.enter)="sendMessage(messageBox.value);messageBox.value=''"/>
 
+            </div>
+        </div>
+        <div class="row" [hidden]="hidInbox" style="  border: 1px solid #0D3349; overflow: scroll">
+            <div class="container-fluid">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 fwhite" id="conversation-module">
+                    <div class="row" *ngFor="let conversation of inbox_conversations">
+                        <div class="col-lg-12 conversation-container" *ngIf="isNotEmptyObject(conversation.message )">
+                            <img class="img-circle conversation-image" src="{{ conversation.message.sender_image }}"
+                                 alt="Avatar">
+                            <span>{{ conversation.message.text }}</span>
+                            <br><span
+                                class="time-right">{{ conversation.modified_date |  date:'MM/dd/yyyy:hh:mm' }}</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="row fheight100">
