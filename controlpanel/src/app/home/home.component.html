@@ -55,7 +55,7 @@
                             <div class="row" *ngFor="let message of messages">
                                 <div class="col-lg-12 conversation-container from-sender">
                                     <div class="container-fluid">
-                                        <div class="row" *ngIf="message.sender === selectedUserId">
+                                        <div class="row" *ngIf="message.sender === selectedUserId" >
                                             <!-- sender part-->
                                             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
                                                 <img class="img-circle" src="{{ message.image }}" alt="Avatar"
@@ -107,7 +107,7 @@
             <div class="container-fluid">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 fwhite" id="conversation-module">
                     <div class="row" *ngFor="let conversation of inbox_conversations">
-                        <div class="col-lg-12 conversation-container" *ngIf="isNotEmptyObject(conversation.message )">
+                        <div class="col-lg-12 conversation-container" *ngIf="isNotEmptyObject(conversation.message )" (click)="load_conversation_by_id(conversation.id)">
                             <img class="img-circle conversation-image" src="{{ conversation.message.sender_image }}"
                                  alt="Avatar">
                             <span>{{ conversation.message.text }}</span>

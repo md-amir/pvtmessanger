@@ -126,5 +126,22 @@ export class HomeComponent implements OnInit {
   return !(obj && (Object.keys(obj).length === 0));
 }
 
+  public load_conversation_by_id(conversationId){
+    let id = conversationId
+    let data = {"id":id}
+
+    this.homeService.ConversationById(data)
+      .subscribe(response => {
+        if (response.status == true) {
+          this.hidInbox = true;
+          this.conversation = response.conversation;
+          this.messages = this.conversation.messages;
+          this.selectedUserId = response.counterpart;
+
+        } else {
+        }
+      });
+  }
+
 
 }

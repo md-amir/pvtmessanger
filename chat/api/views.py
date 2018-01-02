@@ -20,8 +20,9 @@ def api_get_my_conversations(request, version):
     :param version: v1/v2
     :return: logged in users conversations with all other users
     """
-    me = request.user # logged in user
-    conversations = Conversation.objects.filter(subscriber__id__in=[me.id], is_deleted=False, is_archived=False).order_by("-modified_date")
+    me = request.user  # logged in user
+    conversations = Conversation.objects.filter(subscriber__id__in=[me.id], is_deleted=False,
+                                                is_archived=False).order_by("-modified_date")
     return Response({"status": True, "conversations": UserConversationSerializer(
         conversations, many=True, remove_fields=['subscriber', 'is_deleted', 'is_archived', 'created_date']).data})
 
@@ -102,3 +103,25 @@ def api_get_individual_conversation(request, version):
 
     return Response({"status": True, "conversation": ConversationSerializer(
         conversation, remove_fields=['subscriber', 'is_deleted', 'is_archived', 'created_date']).data})
+
+
+@api_view(['POST'])
+def api_get_conversation_by_id(request, version):
+    """
+    :param request: conversation id
+    :param version: v1/v2
+    :return: conversation message list
+    """
+    me = request.user
+    conversation_id = request.data.get('id', None)
+    try:
+        conversation = Conversation.objects.prefetch_related('messages').get(pk=conversation_id)
+        counter_part= conversation.subscriber.all().exclude(id=me.id)
+        if counter_part:
+            a_user = counter_part[0]
+    except:
+        return api_status_response(False, "conversation with this selected id not found")
+
+    return Response({"status": True, "counterpart":a_user.id, "conversation": ConversationSerializer(
+        conversation, remove_fields=['subscriber', 'is_deleted', 'is_archived', 'created_date']).data})
+
