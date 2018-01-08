@@ -22,10 +22,10 @@ from django.views.static import serve
 import accounts
 
 urlpatterns = [
-    url(r'^accounts/', include('accounts.urls')),  # for web pages
-    url(r'^accounts/api/(?P<version>(v1|v2))/', include('accounts.api.urls')),  # for rest api
-    url(r'^chat/', include('chat.urls')),  # for rest api
-    url(r'^chat/api/(?P<version>(v1|v2))/', include('chat.api.urls')),  # for rest api
-    path('admin/', admin.site.urls),
+                  url(r'^accounts/', include('accounts.urls')),  # for web pages
+                  url(r'^accounts/api/(?P<version>(v1|v2))/', include('accounts.api.urls')),  # for rest api
+                  url(r'^chat/', include('chat.urls')),  # for rest api
+                  url(r'^chat/api/(?P<version>(v1|v2))/', include('chat.api.urls')),  # for rest api
+                  path('admin/', admin.site.urls),
 
-]+ [url(r'^media/(?P<path>.*)$', serve,{'document_root' : settings.MEDIA_ROOT,}),]
+              ] + [url(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT, }), ]
