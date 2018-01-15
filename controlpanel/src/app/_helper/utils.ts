@@ -6,7 +6,8 @@ export default class ChatUtils {
      * Different url for rest api
      */
 
-    static BASE_URL = 'http://localhost:8000';
+    //static BASE_URL = 'http://localhost:8000';
+	  static BASE_URL = 'https://pvtmessanger.herokuapp.com';
     static API_REST_LOGIN = ChatUtils.BASE_URL+ '/accounts/api/v1/login';
     static API_REST_ALL_USER = ChatUtils.BASE_URL+ '/accounts/api/v1/users';
     static API_GET_INDIVIDUAL_CONVERSATION = ChatUtils.BASE_URL+ '/chat/api/v1/individual/conversation';

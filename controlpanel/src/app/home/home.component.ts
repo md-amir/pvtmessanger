@@ -28,6 +28,7 @@ export class HomeComponent implements OnInit {
   headerMessage: string;
   messageValue: string;
   hidInbox: boolean;
+  baseurl: string;
 
   constructor(private router: Router,
               private route: ActivatedRoute,
@@ -54,6 +55,7 @@ export class HomeComponent implements OnInit {
     this.messageValue = '';
     this.hidInbox = true;
     this.headerMessage = "Chatting Room";
+    this.baseurl = ChatUtils.BASE_URL;
   }
 
   public load_inbox() {

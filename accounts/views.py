@@ -7,4 +7,4 @@ from rest_framework.response import Response
 
 
 def index(request):
-    return render(request, 'accounts/index.html' , context=None)
+    return render(request, 'index.html', context=None)
