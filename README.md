@@ -1,4 +1,8 @@
 # Django + Angular (Assessment of practical skills)
+* Heroku link: https://pvtmessanger.herokuapp.com/home
+* Firebase link: https://privatemessenger-b821c.firebaseapp.com/home
+for trying : username: wasfi
+             password: wasfi12345
 
 Our task is to write a reusable Django app that can handle private messages between Users
 
